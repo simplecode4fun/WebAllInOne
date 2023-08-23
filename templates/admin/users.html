@@ -1,0 +1,1482 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <meta name="description" content="">
+    <meta name="author" content="">
+
+    <title>Users</title>
+
+    <!-- Custom fonts for this template -->
+    <link href="../static/vendor/fontawesome-free/css/all.min.css" rel="stylesheet" type="text/css">
+    <link href="https://fonts.googleapis.com/css?family=Nunito:200,200i,300,300i,400,400i,600,600i,700,700i,800,800i,900,900i" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.3.0/css/all.min.css">
+
+    <!-- Custom styles for this template -->
+    <link href="../static/css/sb-admin-2.min.css" rel="stylesheet">
+
+    <!-- Custom styles for this page -->
+    <link href="../static/vendor/datatables/dataTables.bootstrap4.min.css" rel="stylesheet">
+
+    <link href="../static/css/alert.css" rel="stylesheet"/>
+    <link href="../static/css/users.css" rel="stylesheet"/>
+
+    <!-- <link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/1.11.5/css/jquery.dataTables.min.css"> -->
+
+</head>
+
+<body id="page-top">
+
+    <!-- Page Wrapper -->
+    <div id="wrapper">
+
+        <div class="alert error-alert" id="error-alert" style="background-color: #5a2b2f; display: none;">
+            <i class="fa-solid fa-circle-exclamation"></i>
+            <div>
+                <div class="title">Lỗi</div>
+                <p class="alert-content"></p>
+            </div>
+            <a class="fa-solid fa-xmark close-alert"></a>
+        </div>
+
+        <div class="alert success-alert" id="success-alert" style="background-color: #a8f0c6; display: none;">
+            <i class="fa-solid fa-circle-check"></i>
+            <div>
+                <div class="title">Thành Công</div>
+                <p class="alert-content"></p>
+            </div>
+            <a class="fa-solid fa-xmark close-alert"></a>
+        </div>
+        <div class="add-user-form" id="add-user" style="display: none;">
+            <div class="overlay" onclick="closeAddUserForm()"></div>
+            <form action="/add-user" class="form-container">
+                <h1>Add</h1>
+        
+                <label for="username"><b>Username</b></label>
+                <input type="text" class="fill-add-user" placeholder="Enter Username" name="username" required><br>
+        
+                <label for="password"><b>Password</b></label>
+                <input type="password" id="password" class="fill-add-user" placeholder="Enter Password" name="password" required>
+                <button type="button" class="password-toggle-button" onclick="togglePasswordVisibility()"><i class="fa-solid fa-eye"></i></button>
+        
+                <label for="name"><b>Name</b></label>
+                <input type="text" class="fill-add-user" placeholder="Enter Name" name="name" required><br>
+        
+                <label for="user-role"><b>User Role</b></label>
+                <select id="user-role" class="fill-add-user" name="user-role" required>
+                    <option value="Guest" selected>Guest</option>
+                    <option value="Member">Member</option>
+                    <option value="Admin">Admin</option>
+                    <option value="Other">Other</option>
+                </select><br>
+        
+                <button type="submit" class="btn">Add</button>
+                <button type="button" class="btn cancel" onclick="closeAddUserForm()">Close</button>
+            </form>
+        </div>
+        
+
+
+        <!-- Sidebar -->
+        <ul class="navbar-nav bg-gradient-primary sidebar sidebar-dark accordion" id="accordionSidebar">
+
+            <!-- Sidebar - Brand -->
+            <a class="sidebar-brand d-flex align-items-center justify-content-center" href="/admin">
+                <div class="sidebar-brand-icon rotate-n-15">
+                    <i class="fas fa-laugh-wink"></i>
+                </div>
+                <div class="sidebar-brand-text mx-3">SB Admin <sup>2</sup></div>
+            </a>
+
+            <!-- Divider -->
+            <hr class="sidebar-divider my-0">
+
+            <!-- Nav Item - Dashboard -->
+            <li class="nav-item">
+                <a class="nav-link" href="/admin">
+                    <i class="fas fa-fw fa-tachometer-alt"></i>
+                    <span>Dashboard</span></a>
+            </li>
+
+            <!-- Divider -->
+            <hr class="sidebar-divider">
+
+            <!-- Heading -->
+            <div class="sidebar-heading">
+                Interface
+            </div>
+
+            <!-- Nav Item - Pages Collapse Menu -->
+            <li class="nav-item">
+                <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapseTwo"
+                    aria-expanded="true" aria-controls="collapseTwo">
+                    <i class="fas fa-fw fa-cog"></i>
+                    <span>Components</span>
+                </a>
+                <div id="collapseTwo" class="collapse" aria-labelledby="headingTwo" data-parent="#accordionSidebar">
+                    <div class="bg-white py-2 collapse-inner rounded">
+                        <h6 class="collapse-header">Custom Components:</h6>
+                        <a class="collapse-item" href="buttons.html">Buttons</a>
+                        <a class="collapse-item" href="cards.html">Cards</a>
+                    </div>
+                </div>
+            </li>
+
+            <!-- Nav Item - Utilities Collapse Menu -->
+            <li class="nav-item">
+                <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapseUtilities"
+                    aria-expanded="true" aria-controls="collapseUtilities">
+                    <i class="fas fa-fw fa-wrench"></i>
+                    <span>Utilities</span>
+                </a>
+                <div id="collapseUtilities" class="collapse" aria-labelledby="headingUtilities"
+                    data-parent="#accordionSidebar">
+                    <div class="bg-white py-2 collapse-inner rounded">
+                        <h6 class="collapse-header">Custom Utilities:</h6>
+                        <a class="collapse-item" href="utilities-color.html">Colors</a>
+                        <a class="collapse-item" href="utilities-border.html">Borders</a>
+                        <a class="collapse-item" href="utilities-animation.html">Animations</a>
+                        <a class="collapse-item" href="utilities-other.html">Other</a>
+                    </div>
+                </div>
+            </li>
+
+            <!-- Divider -->
+            <hr class="sidebar-divider">
+
+            <!-- Heading -->
+            <div class="sidebar-heading">
+                Addons
+            </div>
+
+            <!-- Nav Item - Pages Collapse Menu -->
+            <li class="nav-item">
+                <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapsePages"
+                    aria-expanded="true" aria-controls="collapsePages">
+                    <i class="fas fa-fw fa-folder"></i>
+                    <span>Pages</span>
+                </a>
+                <div id="collapsePages" class="collapse" aria-labelledby="headingPages" data-parent="#accordionSidebar">
+                    <div class="bg-white py-2 collapse-inner rounded">
+                        <h6 class="collapse-header">Login Screens:</h6>
+                        <a class="collapse-item" href="/login">Login</a>
+                        <a class="collapse-item" href="register.html">Register</a>
+                        <a class="collapse-item" href="forgot-password.html">Forgot Password</a>
+                        <div class="collapse-divider"></div>
+                        <h6 class="collapse-header">Other Pages:</h6>
+                        <a class="collapse-item" href="404.html">404 Page</a>
+                        <a class="collapse-item" href="blank.html">Blank Page</a>
+                    </div>
+                </div>
+            </li>
+
+            <!-- Nav Item - Charts -->
+            <li class="nav-item">
+                <a class="nav-link" href="charts.html">
+                    <i class="fas fa-fw fa-chart-area"></i>
+                    <span>Charts</span></a>
+            </li>
+
+            <!-- Nav Item - Tables -->
+            <li class="nav-item active">
+                <a class="nav-link" href="tables.html">
+                    <i class="fas fa-fw fa-table"></i>
+                    <span>Tables</span></a>
+            </li>
+
+            <!-- Divider -->
+            <hr class="sidebar-divider d-none d-md-block">
+
+            <!-- Sidebar Toggler (Sidebar) -->
+            <div class="text-center d-none d-md-inline">
+                <button class="rounded-circle border-0" id="sidebarToggle"></button>
+            </div>
+
+        </ul>
+        <!-- End of Sidebar -->
+
+        <!-- Content Wrapper -->
+        <div id="content-wrapper" class="d-flex flex-column">
+
+            <!-- Main Content -->
+            <div id="content">
+
+                <!-- Topbar -->
+                <nav class="navbar navbar-expand navbar-light bg-white topbar mb-4 static-top shadow">
+
+                    <!-- Sidebar Toggle (Topbar) -->
+                    <form class="form-inline">
+                        <button id="sidebarToggleTop" class="btn btn-link d-md-none rounded-circle mr-3">
+                            <i class="fa fa-bars"></i>
+                        </button>
+                    </form>
+
+                    <!-- Topbar Search -->
+                    <form
+                        class="d-none d-sm-inline-block form-inline mr-auto ml-md-3 my-2 my-md-0 mw-100 navbar-search">
+                        <div class="input-group">
+                            <input type="text" class="form-control bg-light border-0 small" placeholder="Search for..."
+                                aria-label="Search" aria-describedby="basic-addon2">
+                            <div class="input-group-append">
+                                <button class="btn btn-primary" type="button">
+                                    <i class="fas fa-search fa-sm"></i>
+                                </button>
+                            </div>
+                        </div>
+                    </form>
+
+                    <!-- Topbar Navbar -->
+                    <ul class="navbar-nav ml-auto">
+
+                        <!-- Nav Item - Search Dropdown (Visible Only XS) -->
+                        <li class="nav-item dropdown no-arrow d-sm-none">
+                            <a class="nav-link dropdown-toggle" href="#" id="searchDropdown" role="button"
+                                data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                <i class="fas fa-search fa-fw"></i>
+                            </a>
+                            <!-- Dropdown - Messages -->
+                            <div class="dropdown-menu dropdown-menu-right p-3 shadow animated--grow-in"
+                                aria-labelledby="searchDropdown">
+                                <form class="form-inline mr-auto w-100 navbar-search">
+                                    <div class="input-group">
+                                        <input type="text" class="form-control bg-light border-0 small"
+                                            placeholder="Search for..." aria-label="Search"
+                                            aria-describedby="basic-addon2">
+                                        <div class="input-group-append">
+                                            <button class="btn btn-primary" type="button">
+                                                <i class="fas fa-search fa-sm"></i>
+                                            </button>
+                                        </div>
+                                    </div>
+                                </form>
+                            </div>
+                        </li>
+
+                        <!-- Nav Item - Alerts -->
+                        <li class="nav-item dropdown no-arrow mx-1">
+                            <a class="nav-link dropdown-toggle" href="#" id="alertsDropdown" role="button"
+                                data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                <i class="fas fa-bell fa-fw"></i>
+                                <!-- Counter - Alerts -->
+                                <span class="badge badge-danger badge-counter">3+</span>
+                            </a>
+                            <!-- Dropdown - Alerts -->
+                            <div class="dropdown-list dropdown-menu dropdown-menu-right shadow animated--grow-in"
+                                aria-labelledby="alertsDropdown">
+                                <h6 class="dropdown-header">
+                                    Alerts Center
+                                </h6>
+                                <a class="dropdown-item d-flex align-items-center" href="#">
+                                    <div class="mr-3">
+                                        <div class="icon-circle bg-primary">
+                                            <i class="fas fa-file-alt text-white"></i>
+                                        </div>
+                                    </div>
+                                    <div>
+                                        <div class="small text-gray-500">December 12, 2019</div>
+                                        <span class="font-weight-bold">A new monthly report is ready to download!</span>
+                                    </div>
+                                </a>
+                                <a class="dropdown-item d-flex align-items-center" href="#">
+                                    <div class="mr-3">
+                                        <div class="icon-circle bg-success">
+                                            <i class="fas fa-donate text-white"></i>
+                                        </div>
+                                    </div>
+                                    <div>
+                                        <div class="small text-gray-500">December 7, 2019</div>
+                                        $290.29 has been deposited into your account!
+                                    </div>
+                                </a>
+                                <a class="dropdown-item d-flex align-items-center" href="#">
+                                    <div class="mr-3">
+                                        <div class="icon-circle bg-warning">
+                                            <i class="fas fa-exclamation-triangle text-white"></i>
+                                        </div>
+                                    </div>
+                                    <div>
+                                        <div class="small text-gray-500">December 2, 2019</div>
+                                        Spending Alert: We've noticed unusually high spending for your account.
+                                    </div>
+                                </a>
+                                <a class="dropdown-item text-center small text-gray-500" href="#">Show All Alerts</a>
+                            </div>
+                        </li>
+
+                        <!-- Nav Item - Messages -->
+                        <li class="nav-item dropdown no-arrow mx-1">
+                            <a class="nav-link dropdown-toggle" href="#" id="messagesDropdown" role="button"
+                                data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                <i class="fas fa-envelope fa-fw"></i>
+                                <!-- Counter - Messages -->
+                                <span class="badge badge-danger badge-counter">7</span>
+                            </a>
+                            <!-- Dropdown - Messages -->
+                            <div class="dropdown-list dropdown-menu dropdown-menu-right shadow animated--grow-in"
+                                aria-labelledby="messagesDropdown">
+                                <h6 class="dropdown-header">
+                                    Message Center
+                                </h6>
+                                <a class="dropdown-item d-flex align-items-center" href="#">
+                                    <div class="dropdown-list-image mr-3">
+                                        <img class="rounded-circle" src="img/undraw_profile_1.svg"
+                                            alt="...">
+                                        <div class="status-indicator bg-success"></div>
+                                    </div>
+                                    <div class="font-weight-bold">
+                                        <div class="text-truncate">Hi there! I am wondering if you can help me with a
+                                            problem I've been having.</div>
+                                        <div class="small text-gray-500">Emily Fowler · 58m</div>
+                                    </div>
+                                </a>
+                                <a class="dropdown-item d-flex align-items-center" href="#">
+                                    <div class="dropdown-list-image mr-3">
+                                        <img class="rounded-circle" src="img/undraw_profile_2.svg"
+                                            alt="...">
+                                        <div class="status-indicator"></div>
+                                    </div>
+                                    <div>
+                                        <div class="text-truncate">I have the photos that you ordered last month, how
+                                            would you like them sent to you?</div>
+                                        <div class="small text-gray-500">Jae Chun · 1d</div>
+                                    </div>
+                                </a>
+                                <a class="dropdown-item d-flex align-items-center" href="#">
+                                    <div class="dropdown-list-image mr-3">
+                                        <img class="rounded-circle" src="img/undraw_profile_3.svg"
+                                            alt="...">
+                                        <div class="status-indicator bg-warning"></div>
+                                    </div>
+                                    <div>
+                                        <div class="text-truncate">Last month's report looks great, I am very happy with
+                                            the progress so far, keep up the good work!</div>
+                                        <div class="small text-gray-500">Morgan Alvarez · 2d</div>
+                                    </div>
+                                </a>
+                                <a class="dropdown-item d-flex align-items-center" href="#">
+                                    <div class="dropdown-list-image mr-3">
+                                        <img class="rounded-circle" src="https://source.unsplash.com/Mv9hjnEUHR4/60x60"
+                                            alt="...">
+                                        <div class="status-indicator bg-success"></div>
+                                    </div>
+                                    <div>
+                                        <div class="text-truncate">Am I a good boy? The reason I ask is because someone
+                                            told me that people say this to all dogs, even if they aren't good...</div>
+                                        <div class="small text-gray-500">Chicken the Dog · 2w</div>
+                                    </div>
+                                </a>
+                                <a class="dropdown-item text-center small text-gray-500" href="#">Read More Messages</a>
+                            </div>
+                        </li>
+
+                        <div class="topbar-divider d-none d-sm-block"></div>
+
+                        <!-- Nav Item - User Information -->
+                        <li class="nav-item dropdown no-arrow">
+                            <a class="nav-link dropdown-toggle" href="#" id="userDropdown" role="button"
+                                data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                <span class="mr-2 d-none d-lg-inline text-gray-600 small">Douglas McGee</span>
+                                <img class="img-profile rounded-circle"
+                                    src="img/undraw_profile.svg">
+                            </a>
+                            <!-- Dropdown - User Information -->
+                            <div class="dropdown-menu dropdown-menu-right shadow animated--grow-in"
+                                aria-labelledby="userDropdown">
+                                <a class="dropdown-item" href="#">
+                                    <i class="fas fa-user fa-sm fa-fw mr-2 text-gray-400"></i>
+                                    Profile
+                                </a>
+                                <a class="dropdown-item" href="#">
+                                    <i class="fas fa-cogs fa-sm fa-fw mr-2 text-gray-400"></i>
+                                    Settings
+                                </a>
+                                <a class="dropdown-item" href="#">
+                                    <i class="fas fa-list fa-sm fa-fw mr-2 text-gray-400"></i>
+                                    Activity Log
+                                </a>
+                                <div class="dropdown-divider"></div>
+                                <a class="dropdown-item" href="#" data-toggle="modal" data-target="#logoutModal">
+                                    <i class="fas fa-sign-out-alt fa-sm fa-fw mr-2 text-gray-400"></i>
+                                    Logout
+                                </a>
+                            </div>
+                        </li>
+
+                    </ul>
+
+                </nav>
+                <!-- End of Topbar -->
+                
+                {% block content %}
+                <!-- Begin Page Content -->
+                <div class="container-fluid">
+
+                    <!-- DataTales Users -->
+                    
+                        <div class="card shadow mb-4">
+                            <div class="card-header py-3">
+                                <h6 class="m-0 font-weight-bold text-primary">DataTables Example</h6>
+                            </div>
+                            <div class="card-body">
+                                <div class="table-responsive">
+                                    <div class="table-responsive">
+                                        <div id="dataTable_wrapper" class="dataTables_wrapper dt-bootstrap4">
+                                            <div class="row">
+                                                <div class="col-sm-12 col-md-4">
+                                                    <div class="dataTables_length" id="dataTable_length">
+                                                        <form action="/users" method="post" id="user-form">
+                                                            <label for="option">Show 
+                                                                <select id="count_user_option" name="count_user_option" aria-controls="dataTable" class="custom-select custom-select-sm form-control form-control-sm">
+                                                                    <option value="10" {% if count_user_option == 10 %}selected{% endif %}>10</option>
+                                                                    <option value="25" {% if count_user_option == 25 %}selected{% endif %}>25</option>
+                                                                    <option value="50" {% if count_user_option == 50 %}selected{% endif %}>50</option>
+                                                                    <option value="100" {% if count_user_option == 100 %}selected{% endif %}>100</option>
+                                                                </select> entries
+                                                            </label>
+                                                        </form>
+                                                    </div>
+                                                </div>
+                                                <div class="col-sm-12 col-md-4">
+                                                    <div class="add-user-button" style="text-align: center;">
+                                                        <button id="add-user-btn" class="btn btn-primary" onclick="openAddUserForm()">Add User</button>
+                                                    </div>
+                                                </div>
+                                                <div class="col-sm-12 col-md-4">
+                                                    <div id="dataTable_filter" class="dataTables_filter">
+                                                        <label>Search:
+                                                            <input type="search" class="form-control form-control-sm" placeholder="" aria-controls="dataTable">
+                                                        </label>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            
+                                            <div class="row">
+                                                <div class="col-sm-12 table-container">
+                                                    <!-- <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0"> -->
+                                                    <table class="data-table" style="scrollbar-width: auto;">
+                                                        <thead>
+                                                            <tr role="row">
+                                                                <!-- <th class="sorting" tabindex="0" aria-controls="dataTable" rowspan="1" colspan="1" style="min-width: 100px;" aria-sort="ascending" aria-label="Username: activate to sort column descending">
+                                                                    <button id="username">Username</button>
+                                                                </th> -->
+                                                                <th>
+                                                                    <button id="username">Username</button>
+                                                                </th>
+                                                                <th>
+                                                                    <button id="password">Password</button>
+                                                                </th>
+                                                                <th>
+                                                                    <button id="name">Name</button>
+                                                                </th>
+                                                                <th>
+                                                                    <button id="user_role">User Role</button>
+                                                                </th>
+                                                                <th>
+                                                                    <button id="user_status">User Status</button>
+                                                                </th>
+                                                                <th>
+                                                                    <button id="description">Description</button>
+                                                                </th>
+                                                                <!-- <th class="sorting" tabindex="0" data-column="username" data-order="asc">Username</th>
+                                                                <th class="sorting" tabindex="0" data-column="password" data-order="asc">Password</th>
+                                                                <th class="sorting" tabindex="0" data-column="name" data-order="asc">Name</th>
+                                                                <th class="sorting" tabindex="0" data-column="user_role" data-order="asc">User Role</th>
+                                                                <th class="sorting" tabindex="0" data-column="user_status" data-order="asc">User Status</th>
+                                                                <th class="sorting" tabindex="0" data-column="description" data-order="asc">Description</th> -->
+
+                                                            </tr>
+                                                        </thead>
+                                                        <!-- <tfoot>
+                                                            <tr>
+                                                                <th rowspan="1" colspan="1">Username</th>
+                                                                <th rowspan="1" colspan="1">Password</th>
+                                                                <th rowspan="1" colspan="1">Name</th>
+                                                                <th rowspan="1" colspan="1">User Role</th>
+                                                                <th rowspan="1" colspan="1">User Status</th>
+                                                                <th rowspan="1" colspan="1">Description</th>
+                                                            </tr>
+                                                        </tfoot> -->
+                                                        <!-- {% for user in users %} -->
+                                                        <tbody id="table-content">
+                                                            <!-- <tr class="sorting_1">
+                                                                <td>{{ user["username"] }}</td>
+                                                                <td>{{ user["password"] }}</td>
+                                                                <td>{{ user["name"] }}</td>
+                                                                <td>{{ user["user_role"] }}</td>
+                                                                <td>{{ user["user_status"] }}</td>
+                                                                <td>{{ user["description"] }}</td>
+                                                            </tr> -->
+                                                        </tbody>
+                                                        <!-- {% endfor %} -->
+                                                    </table>
+                                                    
+                                                </div>    
+                                            </div>
+                                            <div class="row">
+                                                <div class="col-sm-12 col-md-5">
+                                                    <div class="dataTables_info" id="dataTable_info" role="status" aria-live="polite">Showing 1 to 10 of {{ count_users["count_users"] }} entries</div>
+                                                </div>
+                                                <div class="col-sm-12 col-md-7">
+                                                    <div class="dataTables_paginate paging_simple_numbers" id="dataTable_paginate">
+                                                        <ul class="pagination">
+                                                            <li class="paginate_button page-item previous disabled" id="dataTable_previous">
+                                                                <a href="#" aria-controls="dataTable" data-dt-idx="0" tabindex="0" class="page-link">Previous</a>
+                                                            </li>
+                                                            <li class="paginate_button page-item active">
+                                                                <a href="#" aria-controls="dataTable" data-dt-idx="1" tabindex="0" class="page-link">1</a>
+                                                            </li>
+                                                            <li class="paginate_button page-item ">
+                                                                <a href="#" aria-controls="dataTable" data-dt-idx="2" tabindex="0" class="page-link">2</a>
+                                                            </li>
+                                                            <li class="paginate_button page-item ">
+                                                                <a href="#" aria-controls="dataTable" data-dt-idx="3" tabindex="0" class="page-link">3</a>
+                                                            </li>
+                                                            <li class="paginate_button page-item ">
+                                                                <a href="#" aria-controls="dataTable" data-dt-idx="4" tabindex="0" class="page-link">4</a>
+                                                            </li>
+                                                            <li class="paginate_button page-item ">
+                                                                <a href="#" aria-controls="dataTable" data-dt-idx="5" tabindex="0" class="page-link">5</a>
+                                                            </li>
+                                                            <li class="paginate_button page-item ">
+                                                                <a href="#" aria-controls="dataTable" data-dt-idx="6" tabindex="0" class="page-link">6</a>
+                                                            </li>
+                                                            <li class="paginate_button page-item next" id="dataTable_next">
+                                                                <a href="#" aria-controls="dataTable" data-dt-idx="7" tabindex="0" class="page-link">Next</a>
+                                                            </li>
+                                                        </ul>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                </div>
+                <!-- /.container-fluid -->
+                {% endblock %}
+
+            </div>
+            <!-- End of Main Content -->
+
+            <!-- Footer -->
+            <footer class="sticky-footer bg-white">
+                <div class="container my-auto">
+                    <div class="copyright text-center my-auto">
+                        <span>Copyright &copy; Your Website 2020</span>
+                    </div>
+                </div>
+            </footer>
+            <!-- End of Footer -->
+
+        </div>
+        <!-- End of Content Wrapper -->
+
+    </div>
+    <!-- End of Page Wrapper -->
+
+    <!-- Scroll to Top Button-->
+    <a class="scroll-to-top rounded" href="#page-top">
+        <i class="fas fa-angle-up"></i>
+    </a>
+
+    <!-- Logout Modal-->
+    <div class="modal fade" id="logoutModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
+        aria-hidden="true">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="exampleModalLabel">Ready to Leave?</h5>
+                    <button class="close" type="button" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">×</span>
+                    </button>
+                </div>
+                <div class="modal-body">Select "Logout" below if you are ready to end your current session.</div>
+                <div class="modal-footer">
+                    <button class="btn btn-secondary" type="button" data-dismiss="modal">Cancel</button>
+                    <a class="btn btn-primary" href="/login">Logout</a>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Bootstrap core JavaScript-->
+    <script src="../static/vendor/jquery/jquery.min.js"></script>
+    <script src="../static/vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
+
+    <!-- Core plugin JavaScript-->
+    <script src="../static/vendor/jquery-easing/jquery.easing.min.js"></script>
+
+    <!-- Custom scripts for all pages-->
+    <script src="../static/js/sb-admin-2.min.js"></script>
+
+    <!-- Page level plugins -->
+    <script src="../static/vendor/datatables/jquery.dataTables.min.js"></script>
+    <script src="../static/vendor/datatables/dataTables.bootstrap4.min.js"></script>
+
+    <!-- Page level custom scripts -->
+    <script src="../static/js/demo/datatables-demo.js"></script>
+
+    <script src="../static/js/users.js"></script>
+
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    
+    <script src="../static/js/alert.js"></script>
+
+    <script>
+        function openAddUserForm() {
+            document.getElementById("add-user").style.display = "block";
+        }
+
+        function closeAddUserForm() {
+            document.getElementById("add-user").style.display = "none";
+        }
+
+        function togglePasswordVisibility() {
+            var passwordInput = document.getElementById("password");
+            var toggleButton = document.getElementsByClassName("password-toggle-button");
+            // if (passwordInput.type === "password") {
+            //     passwordInput.type = "text";
+            //     passwordInput.textContent = "Hide"
+            // } else {
+            //     passwordInput.type = "password";
+            //     passwordInput.textContent = "Show"
+            // }
+
+            if (passwordInput.type === "password") {
+                passwordInput.type = "text";
+                toggleButton.innerHTML = '<i class="fa-solid fa-eye"></i>';
+            } else {
+                passwordInput.type = "password";
+                toggleButton.innerHTML = '<i class="fa-sharp fa-solid fa-eye-slash"></i>';
+            }
+        }
+    </script>
+
+    <script>
+        var alert_content = document.getElementsByClassName("alert-content");
+        var error_alert = document.getElementById("error-alert");
+        var success_alert = document.getElementById("success-alert");
+
+        var currentTimeout;
+
+        function showAlert(msg = "", warning = true) {
+            clearTimeout(currentTimeout);
+
+            if (msg) {
+                for (var i = 0; i < alert_content.length; i++) {
+                    alert_content[i].textContent = msg;
+                }
+                error_alert.style.display = "none";
+                success_alert.style.display = "none";
+
+                if (warning) {
+                    error_alert.style.display = "grid";
+                    currentTimeout = setTimeout(function () {
+                        error_alert.style.display = "none";
+                    }, 5000);
+                } else {
+                    success_alert.style.display = "grid";
+                    currentTimeout = setTimeout(function () {
+                        success_alert.style.display = "none";
+                    }, 5000);
+                }
+            }
+        }
+
+        $(".close-alert").click(function() {
+            $(this)
+                .parent(".alert")
+                .fadeOut();
+        });
+
+        var closeButtons = document.getElementsByClassName("close-alert");
+
+        if (closeButtons.length > 0) {
+            for (var i = 0; i < closeButtons.length; i++) {
+                (function(index) {
+                    closeButtons[index].addEventListener("click", function() {
+                        console.log("Cảnh báo đã đóng.");
+                    });
+
+                    setTimeout(function() {
+                        var alertToClose = closeButtons[index].closest(".alert");
+                        alertToClose.style.display = "none";
+                        console.log("Closed alert");
+                    }, 5000);
+                })(i);
+            }
+        }
+
+        
+    </script>
+    
+    <script>
+        const tableContent = document.getElementById("table-content")
+        const tableButtons = document.querySelectorAll("th button");
+        userData = []
+
+        // const createCreateLinkColumn = (createLinkColumn, obj) => {
+
+
+        //     const copyButton = document.createElement("button");
+        //     copyButton.innerHTML = '<i class="fa-solid fa-link"></i>';
+        //     copyButton.addEventListener("click", () => {
+        //         const tempInput = document.createElement("input");
+        //         tempInput.value = newUrl;
+        //         document.body.appendChild(tempInput);
+        //         tempInput.select();
+        //         document.execCommand("copy");
+        //         document.body.removeChild(tempInput);
+        //         // Optionally, you can provide user feedback here
+        //     });
+
+        //     createLinkColumn.innerHTML = ''; // Clear previous content
+        //     // createLinkColumn.appendChild(linkInput);
+        //     createLinkColumn.appendChild(copyButton);
+        // };
+
+        const createCreateLinkColumn = async (createLinkColumn, username, password) => {
+            const copyButton = document.createElement("button");
+            copyButton.innerHTML = '<i class="fa-solid fa-link"></i>';
+            copyButton.addEventListener("click", async () => {
+                try {
+                    const response = await fetch(`/create-login-url/${username}/${password}`);
+                    if (!response.ok) {
+                        throw new Error("Failed to fetch URL");
+                    }
+                    const url = await response.text();
+
+                    if (url) {
+                        const tempInput = document.createElement("input");
+                        tempInput.value = url;
+                        document.body.appendChild(tempInput);
+                        tempInput.select();
+                        document.execCommand("copy");
+                        document.body.removeChild(tempInput);
+
+                        // Provide user feedback
+                        console.log("URL copied:", url);
+                        showAlert("Đã tạo và copy link cho " + username, false); // Assuming showAlert is defined elsewhere
+                    } else {
+                        console.error("No URL received");
+                        showAlert("Không tạo và copy link cho " + username + " được", true); // Assuming showAlert is defined elsewhere
+                    }
+                } catch (error) {
+                    console.error("Error copying URL:", error);
+                    showAlert("Không tạo và copy link cho " + username + " được", true); // Assuming showAlert is defined elsewhere
+                }
+                    
+            });
+
+            createLinkColumn.innerHTML = ''; // Clear previous content
+            createLinkColumn.appendChild(copyButton);
+        };
+
+
+        const createRow = (obj) => {
+            const row = document.createElement("tr");
+            const objKeys = Object.keys(obj);
+            const columnOrder = ["username", "password", "name", "user_role", "user_status", "description"];
+
+            columnOrder.forEach((key) => {
+                const cell = document.createElement("td");
+                const username = obj["user_role"]
+                cell.setAttribute("data-attr", key);
+                cell.setAttribute("class", key);
+                // cell.innerHTML = obj[key] === null ? "None" : obj[key]; // Handle null values
+                if (key == "user_status") {
+                    const toggleSwitch = document.createElement("label");
+                    toggleSwitch.classList.add("switch");
+                    const checkbox = document.createElement("input");
+                    checkbox.type = "checkbox";
+                    checkbox.checked = obj[key] === "Active"; // Kiểm tra trạng thái để chọn Active hoặc Deactive
+                    const slider = document.createElement("span");
+                    slider.classList.add("slider");
+
+                    if (obj["user_role"] == "Admin") {
+                        checkbox.disabled = true;
+                    } else {
+                        checkbox.disabled = false;
+                    }
+
+
+                    // Add onclick event handler to the checkbox
+                    checkbox.onclick = async () => {
+                        const new_user_status = checkbox.checked ? "Active" : "Deactive";
+                        const username = obj["username"]; // Replace "user_id" with the actual property name for user ID
+                        // Assuming you're using fetch for AJAX requests
+                        const response = await fetch(`/edit-user/user_status/${username}/${new_user_status}`, {
+                            method: "POST"
+                        });
+                        if (response.ok) {
+                            // Update the user_status in the UI
+                            obj[key] = new_user_status;
+                            // Update the checkbox state (this might not be necessary, depending on your UI behavior)
+                            checkbox.checked = new_user_status === "Active";
+                        } else {
+                            // Handle error
+                            console.error("Failed to update user status.");
+                        }
+                    };
+
+                    
+                    toggleSwitch.appendChild(checkbox);
+                    toggleSwitch.appendChild(slider);
+                    cell.appendChild(toggleSwitch);
+                } else if (key === "password") {
+                    const textContainer = document.createElement("div");
+                    textContainer.className = "cell-content";
+
+                    const passwordNode = document.createElement("span");
+                    passwordNode.textContent = obj[key] === null ? "None" : "********";
+                    textContainer.appendChild(passwordNode);
+
+                    const toggleButton = document.createElement("button");
+                    toggleButton.innerHTML = '<i class="fa-solid fa-eye"></i>';
+                    // toggleButton.textContent = "Hide";
+                    let isHidden = true;
+
+                    toggleButton.addEventListener("click", () => {
+                        isHidden = !isHidden;
+                        if (isHidden) {
+                            passwordNode.textContent = "*********";
+                            // toggleButton.textContent = "Hide";
+                            toggleButton.innerHTML = '<i class="fa-solid fa-eye"></i>';
+                        } else {
+                            passwordNode.textContent = obj[key] === null ? "None" : obj[key];
+                            // toggleButton.textContent = "Unhide";
+                            toggleButton.innerHTML = '<i class="fa-sharp fa-solid fa-eye-slash"></i>';
+                        }
+                    });
+
+                    textContainer.appendChild(toggleButton);
+                    cell.appendChild(textContainer);
+                } else if (key == "name") {
+
+                    const textContainer = document.createElement("div");
+                    textContainer.className = "cell-content";
+
+                    const textNode = document.createElement("span");
+                    textNode.textContent = obj[key] === null ? "None" : obj[key];
+                    textContainer.appendChild(textNode);
+
+                    const editButton = document.createElement("button");
+                    editButton.innerHTML = '<i class="fas fa-edit"></i>';
+                    editButton.addEventListener("click", () => {
+                        textNode.style.display = "none";
+                        editButton.style.display = "none";
+
+                        const input = document.createElement("input");
+                        input.value = textNode.textContent;
+                        textContainer.appendChild(input);
+                        input.focus();
+                        input.addEventListener("keydown", async (event) => {
+                            if (event.key === "Enter") {
+                                const new_name = input.value;
+                                const username = obj["username"]; // Replace with actual user ID property
+                                const response = await fetch(`/edit-user/name/${username}/${new_name}`, {
+                                    method: "POST"
+                                });
+
+                                if (response.ok) {
+                                    textNode.textContent = new_name;
+                                } else {
+                                    console.error("Failed to update user status.");
+                                }
+
+                                textNode.style.display = "inline";
+                                editButton.style.display = "inline";
+                                input.remove();
+                                
+                                // textNode.textContent = input.value;
+                                // textNode.style.display = "inline";
+                                // editButton.style.display = "inline";
+                                // input.remove();
+                            }
+                        });
+
+                        input.addEventListener("blur", async () => {
+                            const new_name = input.value;
+                            const username = obj["username"]; // Replace with actual user ID property
+                            const response = await fetch(`/edit-user/name/${username}/${new_name}`, {
+                                method: "POST"
+                            });
+
+                            if (response.ok) {
+                                textNode.textContent = new_name;
+                            } else {
+                                console.error("Failed to update user status.");
+                            }
+
+                            textNode.style.display = "inline";
+                            editButton.style.display = "inline";
+                            input.remove();
+                            // textNode.textContent = input.value;
+                            // textNode.style.display = "inline";
+                            // editButton.style.display = "inline";
+                            // input.remove();
+                        });
+
+                        cell.appendChild(input);
+                        input.focus();
+                    });
+
+                    textContainer.appendChild(textNode);
+                    textContainer.appendChild(editButton);
+                    cell.appendChild(textContainer);
+                } else if (key == "user_role") {
+                    // const textContainer = document.createElement("div");
+                    // textContainer.className = "cell-content";
+
+                    // const textNode = document.createElement("span");
+                    // textNode.textContent = obj[key] === null ? "None" : obj[key];
+                    // textContainer.appendChild(textNode);
+
+                    // const editButton = document.createElement("button");
+                    // editButton.innerHTML = '<i class="fas fa-edit"></i>';
+                    // editButton.addEventListener("click", () => {
+                    //     textNode.style.display = "none";
+                    //     editButton.style.display = "none";
+
+                    //     const comboBox = document.createElement("select");
+                    //     const roles = ["Admin", "Member", "Guest", "Other"]; // Replace with your actual role values
+                    //     roles.forEach((role) => {
+                    //         const option = document.createElement("option");
+                    //         option.value = role;
+                    //         option.textContent = role;
+                    //         if (role === obj[key]) {
+                    //             option.selected = true;
+                    //         }
+                    //         comboBox.appendChild(option);
+                    //     });
+                    //     textContainer.appendChild(comboBox);
+                    //     comboBox.focus();
+
+                    //     comboBox.addEventListener("change", async () => {
+                    //         const new_user_role = comboBox.value;
+                    //         const username = obj["username"]; // Replace with actual user ID property
+                    //         const response = await fetch(`/edit-user/user_role/${username}/${new_user_role}`, {
+                    //             method: "POST"
+                    //         });
+
+                    //         if (response.ok) {
+                    //             textNode.textContent = new_user_role;
+                    //         } else {
+                    //             console.error("Failed to update user status.");
+                    //         }
+
+                    //         textNode.style.display = "inline";
+                    //         editButton.style.display = "inline";
+                    //         comboBox.remove();
+                    //     });
+                    // });
+
+                    // textContainer.appendChild(textNode);
+                    // textContainer.appendChild(editButton);
+                    // cell.appendChild(textContainer);
+
+                    const textContainer = document.createElement("div");
+                    textContainer.className = "cell-content";
+
+                    const textNode = document.createElement("span");
+                    textNode.textContent = obj[key] === null ? "None" : obj[key];
+                    textContainer.appendChild(textNode);
+
+                    const editButton = document.createElement("button");
+                    editButton.innerHTML = '<i class="fas fa-edit"></i>';
+                    editButton.addEventListener("click", () => {
+                        textNode.style.display = "none";
+                        editButton.style.display = "none";
+
+                        const comboBox = document.createElement("select");
+                        const roles = ["Admin", "Member", "Guest", "Other"]; // Replace with your actual role values
+                        roles.forEach((role) => {
+                            const option = document.createElement("option");
+                            option.value = role;
+                            option.textContent = role;
+                            if (role === obj[key]) {
+                                option.selected = true;
+                            }
+                            comboBox.appendChild(option);
+                        });
+                        textContainer.appendChild(comboBox);
+                        comboBox.focus();
+
+                        comboBox.addEventListener("change", async () => {
+                            const new_user_role = comboBox.value;
+                            const username = obj["username"]; // Replace with actual user ID property
+                            const response = await fetch(`/edit-user/user_role/${username}/${new_user_role}`, {
+                                method: "POST"
+                            });
+
+                            if (response.ok) {
+                                textNode.textContent = new_user_role;
+                            } else {
+                                console.error("Failed to update user role.");
+                            }
+
+                            textNode.style.display = "inline";
+                            editButton.style.display = "inline";
+                            comboBox.remove();
+                        });
+
+                        comboBox.addEventListener("blur", async () => {
+                            const new_user_role = comboBox.value;
+                            const username = obj["username"]; // Replace with actual user ID property
+                            const response = await fetch(`/edit-user/name/${username}/${new_user_role}`, {
+                                method: "POST"
+                            });
+
+                            if (response.ok) {
+                                textNode.textContent = new_user_role;
+                            } else {
+                                console.error("Failed to update user status.");
+                            }
+
+                            textNode.style.display = "inline";
+                            editButton.style.display = "inline";
+                            comboBox.remove();
+                        });
+                    });
+
+                    textContainer.appendChild(textNode);
+                    textContainer.appendChild(editButton);
+                    cell.appendChild(textContainer);
+                } else if (key == "description") {
+
+                    const textContainer = document.createElement("div");
+                    textContainer.className = "cell-content";
+
+                    const textNode = document.createElement("span");
+                    textNode.textContent = obj[key] === null ? "None" : obj[key];
+                    textContainer.appendChild(textNode);
+
+                    const editButton = document.createElement("button");
+                    editButton.innerHTML = '<i class="fas fa-edit"></i>';
+                    editButton.addEventListener("click", () => {
+                        textNode.style.display = "none";
+                        editButton.style.display = "none";
+
+                        const input = document.createElement("input");
+                        input.value = textNode.textContent;
+                        textContainer.appendChild(input);
+                        input.focus();
+                        input.addEventListener("keydown", async (event) => {
+                            if (event.key === "Enter") {
+                                const new_description = input.value;
+                                const username = obj["username"]; // Replace with actual user ID property
+                                const response = await fetch(`/edit-user/description/${username}/${new_description}`, {
+                                    method: "POST"
+                                });
+
+                                if (response.ok) {
+                                    textNode.textContent = new_description;
+                                } else {
+                                    console.error("Failed to update user status.");
+                                }
+
+                                textNode.style.display = "inline";
+                                editButton.style.display = "inline";
+                                input.remove();
+                                
+                                // textNode.textContent = input.value;
+                                // textNode.style.display = "inline";
+                                // editButton.style.display = "inline";
+                                // input.remove();
+                            }
+                        });
+
+                        input.addEventListener("blur", async () => {
+                            const new_description = input.value;
+                            const username = obj["username"]; // Replace with actual user ID property
+                            const response = await fetch(`/edit-user/description/${username}/${new_description}`, {
+                                method: "POST"
+                            });
+
+                            if (response.ok) {
+                                textNode.textContent = new_description;
+                            } else {
+                                console.error("Failed to update user status.");
+                            }
+
+                            textNode.style.display = "inline";
+                            editButton.style.display = "inline";
+                            input.remove();
+                            // textNode.textContent = input.value;
+                            // textNode.style.display = "inline";
+                            // editButton.style.display = "inline";
+                            // input.remove();
+                        });
+
+                        cell.appendChild(input);
+                        input.focus();
+                    });
+
+                    textContainer.appendChild(textNode);
+                    textContainer.appendChild(editButton);
+                    cell.appendChild(textContainer);
+                } else {
+                    cell.innerHTML = obj[key] === null ? "None" : obj[key];
+                }
+                row.appendChild(cell);
+            });
+
+            const createLinkCell = document.createElement("td");
+            createCreateLinkColumn(createLinkCell, obj["username"], obj["password"]); // Pass the cell and user data to the function
+            row.appendChild(createLinkCell);
+            return row;
+        };
+
+        const getTableContent = (data) => {
+                data.forEach((obj) => {
+                    const row = createRow(obj);
+                    tableContent.appendChild(row);
+                });
+        };
+
+        const sortData = (data, param, direction = "asc") => {
+            tableContent.innerHTML = '';
+            const sortedData = direction == "asc"
+                ? [...data].sort(function (a, b) {
+                    if (a[param] < b[param]) {
+                        return -1;
+                    }
+                    if (a[param] > b[param]) {
+                        return 1;
+                    }
+                    return 0;
+                    })
+                : [...data].sort(function (a, b) {
+                    if (b[param] < a[param]) {
+                        return -1;
+                    }
+                    if (b[param] > a[param]) {
+                        return 1;
+                    }
+                    return 0;
+                });
+
+            getTableContent(sortedData);
+        };
+
+        const resetButtons = (event) => {
+            [...tableButtons].map((button) => {
+                if (button !== event.target) {
+                button.removeAttribute("data-dir");
+                }
+            });
+        };
+
+        window.addEventListener("load", () => {
+            const userData = JSON.parse('{{ users | tojson | safe }}'); // Pass user data from Flask to JavaScript
+            getTableContent(userData);
+            
+            [...tableButtons].forEach((button) => {
+                button.addEventListener("click", (e) => {
+                    resetButtons(e);
+                    if (e.target.getAttribute("data-dir") === "desc") {
+                        sortData(userData, e.target.id, "desc");
+                        e.target.setAttribute("data-dir", "asc");
+                    } else {
+                        sortData(userData, e.target.id, "asc");
+                        e.target.setAttribute("data-dir", "desc");
+                    }
+                });
+            });
+        });
+
+        // tableContent.addEventListener("change", async (e) => {
+            // if (e.target.tagName === "INPUT" && e.target.type === "checkbox") {
+            //     const rowIndex = e.target.closest("tr").rowIndex - 1;
+            //     const user = userData[rowIndex];
+            //     console.log(userData)
+
+            //     const newStatus = e.target.checked ? "Active" : "Deactive";
+            //     const newStatusId = e.target.checked ? 1 : 0;
+
+            //     if (user.user_status !== newStatus) {
+            //         user.user_status = newStatus;
+            //         try {
+            //             const response = await fetch(`/update_user_status/${user.username}/${newStatusId}`, {
+            //                 method: "POST" // Hoặc "PUT" tùy thuộc vào cấu hình của bạn
+            //             });
+
+            //             if (!response.ok) {
+            //                 // Xử lý lỗi nếu cần
+            //                 console.error("Error updating user status.");
+            //             }
+            //         } catch (error) {
+            //             console.error("Error updating user status:", error);
+            //         }
+            //     }
+            // }
+        // }); 
+    </script>
+
+    <style>
+        :root {
+            --white: black;
+            --black: white;
+            --gray: black;
+        }
+
+        .alert{
+            position: fixed;
+            align-items: center;
+            right: -2%;
+            top: 10%;
+            padding: 10px;
+            color: #fff;
+            margin-bottom: 10px;
+            z-index: 999;
+            grid-template-columns: 70px 1fr 70px;
+            border-radius: 5px;
+            animation: show 0.3s ease 1 forwards  
+        }
+
+        .login{
+            top: 0.5%;
+        }
+
+        .alert i{
+            color: var(--color);
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            font-size: xx-large;
+        }
+
+        .alert .title{
+            font-size: medium;
+            font-weight: bold;
+        }
+
+        .alert p, .alert i:nth-child(3){
+            color: #fff;
+            opacity: 0.6;
+            margin: 0;
+        }
+
+        .close-alert{
+            position:absolute;
+            width:30px;
+            height:30px;
+            opacity:0.5;
+            right:10px;
+            text-align:center;
+            font-size:1.6em;
+            cursor:pointer;
+        }
+
+        @keyframes show{
+            0%{
+                transform: translateX(100%);
+            }
+            40%{
+                transform: translateX(-5%);
+            }
+            80%{
+                transform: translateX(0%);
+            }
+            100%{
+                transform: translateX(-10%);
+            }
+        }
+
+        .alert::before{
+            position: fixed;
+            bottom: 0;
+            left: 0;
+            background-color: var(--color);
+            width: 100%;
+            height: 3px;
+            content: '';
+            box-shadow: 0 0 10px var(--color);
+            animation: timeOut 5s linear 1 forwards
+        }
+
+        @keyframes timeOut{
+            to{
+                width: 0;
+            }
+        }
+
+        .success-alert{
+            --color: #0abf30;
+            background-image: 
+                linear-gradient(
+                    to right, #0abf3055, #22242f 30%
+                ); 
+        }
+
+        .error-alert{
+            --color: #f24d4c;
+            background-image: 
+                linear-gradient(
+                    to right, #f24d4c55, #22242F 30%
+                );
+        }
+        .warning-alert{
+            --color: #e9bd0c;
+        }
+
+        .info-alert i{
+            --color: #3498db;
+            background-image: 
+                linear-gradient(
+                    to right, #3498db55, #22242F 30%
+                );
+        }
+        
+        .switch {
+            position: relative;
+            display: inline-block;
+            width: 40px;
+            height: 20px;
+            margin: 0;
+            background-color: #ccc;
+            border-radius: 20px;
+        }
+
+        .switch input {
+            opacity: 0;
+            width: 0;
+            height: 0;
+        }
+
+        .slider {
+            position: absolute;
+            cursor: pointer;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background-color: gray;
+            -webkit-transition: .4s;
+            transition: .4s;
+            border-radius: 20px;
+        }
+
+        .slider:before {
+            position: absolute;
+            content: "";
+            height: 14px;
+            width: 14px;
+            left: 3px;
+            bottom: 3px;
+            background-color: white;
+            -webkit-transition: .4s;
+            transition: .4s;
+            border-radius: 50%;
+        }
+
+        input[type="checkbox"]:disabled + .slider {
+            background-color: #ccc; /* Màu nền khi bị disable */
+            cursor: not-allowed; /* Con trỏ chuột khi hover */
+        }
+
+        input:checked + .slider {
+            background-color: #4CAF50;
+        }
+
+        input:checked + .slider:before {
+            -webkit-transform: translateX(20px);
+            -ms-transform: translateX(20px);
+            transform: translateX(20px);
+        }
+
+        button.edit-user{
+            background: white;
+            border-radius: revert;
+        }
+
+        .cell-content {
+            display: flex;
+            align-items: center;
+        }
+
+        .cell-content span {
+            flex: 1;
+            margin-right: 10px; /* Adjust as needed */
+        }
+
+        .cell-content button {
+            background-color: transparent;
+            border: none;
+            cursor: pointer;
+        }
+
+        #content-wrapper #wrapper {
+            overflow-x: auto;
+        }
+
+        body {
+            margin: 0;
+            padding: 0;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
+            background-color: #f1f1f1;
+            font-family: Arial, sans-serif;
+        }
+
+        .add-user-form {
+            display: none;
+            position: fixed;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            background-color: white;
+            border-radius: 10px;
+            box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.2);
+            padding: 20px;
+            z-index: 1000;
+            width: 400px;
+        }
+
+        .form-container {
+            position: relative;
+        }
+
+        .overlay {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(0, 0, 0, 0.5);
+            z-index: 999;
+        }
+
+        /* .add-user-form.open {
+            display: block;
+        } */
+
+        .btn {
+            background-color: #4caf50;
+            color: white;
+            padding: 10px 20px;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            margin-right: 10px;
+        }
+
+        .cancel {
+            background-color: #ccc;
+        }
+        
+    </style>
+
+
+    <!-- <script type="text/javascript" charset="utf8" src="https://cdn.datatables.net/1.11.5/js/jquery.dataTables.js"></script>
+</body>
+
+</html>

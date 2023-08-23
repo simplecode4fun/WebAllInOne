@@ -1,0 +1,153 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <meta name="description" content="">
+    <meta name="author" content="">
+
+    <title>Login</title>
+
+    <!-- Custom fonts for this template -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.3.0/css/all.min.css">
+
+    <link href="../static/css/login.css" rel="stylesheet"/>
+    <link href="../static/css/sb-admin-2.min.css" rel="stylesheet"/>
+    
+
+    <link href="../static/css/alert.css" rel="stylesheet"/>
+
+
+</head>
+
+<body>
+    <div class="wrapper">
+        {% if msg %}
+            {% if warning %}
+            <div class="alert error-alert" id="error-alert" style="background-color: #5a2b2f;">
+                <i class="fa-solid fa-circle-exclamation"></i>
+                <div>
+                    <div class="title">Lỗi</div>
+                    <p class="alert-content">{{ msg }}</p>
+                </div>
+                <a class="fa-solid fa-xmark close-alert"></a>
+            </div>
+            
+            {% else %}
+            <div class="alert success-alert" id="success-alert" style="background-color: #a8f0c6;">
+                <i class="fa-solid fa-circle-check"></i>
+                <div>
+                    <div class="title">Thành Công</div>
+                    <p class="alert-content">{{ msg }}</p>
+                </div>
+                <a class="fa-solid fa-xmark close-alert"></a>
+            </div>
+            {% endif %}
+        {% endif %}
+
+        <div class="container">
+
+            <!-- Outer Row -->
+            <div class="row justify-content-center">
+
+                <div class="col-xl-10 col-lg-12 col-md-9">
+
+                    <div class="card o-hidden border-0 shadow-lg my-5">
+                        <div class="card-body p-0">
+                            <!-- Nested Row within Card Body -->
+                            <div class="row">
+                                <div class="col-lg-6 d-none d-lg-block bg-login-image"></div>
+                                <div class="col-lg-6">
+                                    <div class="login-form">
+                                        <div class="text-center">
+                                            <h1 class="h4 text-gray-900 mb-4">Đăng Nhập</h1>
+                                        </div>
+                                        <form class="user" action="/login" method="post" autocomplete="on">
+                                            <div class="form-group">
+                                                <input type="text" class="form-control form-control-user" id="username" name="username" placeholder="Tài khoản" required>
+                                            </div>
+                                            <div class="form-group"> 
+                                                <input type="password" class="form-control form-control-user" id="password" name="password" placeholder="Mật khẩu" required>
+                                            </div>
+                                            <div class="form-group">
+                                                <div class="custom-control custom-checkbox small">
+                                                    <input type="checkbox" class="custom-control-input" id="customCheck">
+                                                    <label class="custom-control-label" for="customCheck">Remember Me</label>
+                                                </div>
+                                            </div>
+                                            <input id="login" type="submit" class="btn btn-primary btn-user btn-block" value="Đăng Nhập">
+                                        </form>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                </div>
+
+            </div>
+
+        </div>
+    </div>
+
+    <script src="../static/js/alert.js"></script>
+
+    <script>
+        var alert_content = document.getElementsByClassName("alert-content");
+        var error_alert = document.getElementById("error-alert");
+        var success_alert = document.getElementById("success-alert");
+        var close_alert = document.getElementsByClassName("close-alert");
+
+        var currentTimeout;
+
+        function showAlert(msg = "", warning = true) {
+            clearTimeout(currentTimeout);
+
+            if (msg) {
+                for (var i = 0; i < alert_content.length; i++) {
+                    alert_content[i].textContent = msg;
+                }
+                error_alert.style.display = "none";
+                success_alert.style.display = "none";
+
+                if (warning) {
+                    error_alert.style.display = "grid";
+                    currentTimeout = setTimeout(function () {
+                        error_alert.style.display = "none";
+                    }, 5000);
+                } else {
+                    success_alert.style.display = "grid";
+                    currentTimeout = setTimeout(function () {
+                        success_alert.style.display = "none";
+                    }, 5000);
+                }
+            }
+        }
+
+        var closeButtons = document.getElementsByClassName("close-alert");
+
+        if (closeButtons.length > 0) {
+            for (var i = 0; i < closeButtons.length; i++) {
+                (function(index) {
+                    closeButtons[index].addEventListener("click", function() {
+                        var alertToClose = closeButtons[index].closest(".alert");
+                        alertToClose.style.display = "none";
+                        console.log("Cảnh báo đã đóng.");
+                    });
+
+                    setTimeout(function() {
+                        var alertToClose = closeButtons[index].closest(".alert");
+                        alertToClose.style.display = "none";
+                        console.log("Closed alert");
+                    }, 5000);
+                })(i);
+            }
+        }
+        
+    </script>
+</body>
+
+</html>
