@@ -347,5 +347,5 @@ def edit_user(key, username, value):
     warning = True
     return render_template("admin/users.html", msg=msg, warning=warning, users=users, count_users=count_users, count_user_option=limit)
 
-if __name__ == "__main__":
-    app.run(debug=True)
+# if __name__ == "__main__":
+#     app.run(debug=True)
