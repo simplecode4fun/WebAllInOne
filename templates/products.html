@@ -9,7 +9,7 @@
     <meta name="description" content="">
     <meta name="author" content="">
 
-    <title>Users</title>
+    <title>Products</title>
 
     <!-- Custom fonts for this template -->
     <link href="../static/vendor/fontawesome-free/css/all.min.css" rel="stylesheet" type="text/css">
@@ -23,7 +23,7 @@
     <link href="../static/vendor/datatables/dataTables.bootstrap4.min.css" rel="stylesheet">
 
     <link href="../static/css/alert.css" rel="stylesheet"/>
-    <link href="../static/css/users.css" rel="stylesheet"/>
+    <link href="../static/css/products.css" rel="stylesheet"/>
 
     <!-- <link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/1.11.5/css/jquery.dataTables.min.css"> -->
 
@@ -51,54 +51,54 @@
             </div>
             <a class="fa-solid fa-xmark close-alert"></a>
         </div>
-        <div class="add-user-form" id="add-user" style="display: none;">
-            <div class="overlay" onclick="closeAddUserForm()"></div>
-            <form action="/add-user" method="post" class="form-container">
+        <!-- <div class="add-product-form" id="add-product" style="display: none;">
+            <div class="overlay" onclick="closeAddProductForm()"></div>
+            <form action="/add-product" method="post" class="form-container">
                 <div style="display: flex;">
                     <div style="margin-right: 5%; display: grid;">
-                        <label for="username"><b>Username</b></label>
+                        <label for="product_id"><b>Productname</b></label>
                         <label for="password"><b>Password</b></label>
                         <label for="name"><b>Name</b></label>
-                        <label for="user-role"><b>User Role</b></label>
+                        <label for="product-role"><b>Product Role</b></label>
                         <label for="description"><b>Description</b></label>
                     </div>
                     <div>
-                        <input type="text" id="username" class="fill-add-user" placeholder="Enter Username" name="username" onfocus=disableTelexVNI(event) required>
+                        <input type="text" id="product_id" class="fill-add-product" placeholder="Enter Productname" name="product_id" onfocus=disableTelexVNI(event) required>
                         <div>
-                            <input type="password" id="password" class="fill-add-user" placeholder="Enter Password" name="password" required>
+                            <input type="password" id="password" class="fill-add-product" placeholder="Enter Password" name="password" required>
                             <button type="button" class="password-toggle-button" onclick="togglePasswordVisibility()"><i class="fa-solid fa-eye"></i></button>
                         </div>
-                        <input type="text" class="fill-add-user" placeholder="Enter Name" name="name" required><br>
-                        <select id="user-role" class="fill-add-user" name="user-role" required>
+                        <input type="text" class="fill-add-product" placeholder="Enter Name" name="name" required><br>
+                        <select id="product-role" class="fill-add-product" name="product-role" required>
                             <option value="3" selected>Guest</option>
                             <option value="2">Member</option>
                             <option value="1">Admin</option>
                             <option value="4">Other</option>
                         </select><br>
-                        <input type="text" id="description" class="fill-add-user" placeholder="Enter Description" name="description"></input><br>
+                        <input type="text" id="description" class="fill-add-product" placeholder="Enter Description" name="description"></input><br>
                     </div>
                 </div>
                 
-                <button type="submit" class="btn-primary" id="add-user-button">Add</button>
-                <button type="button" class="btn-primary cancel" onclick="closeAddUserForm()">Close</button>
+                <button type="submit" class="btn-primary" id="add-product-button">Add</button>
+                <button type="button" class="btn-primary cancel" onclick="closeAddProductForm()">Close</button>
             </form>
-        </div>
+        </div> -->
         
-        <div class="user-ip-form" id="user-ip" style="display: none;">
-            <div class="overlay" onclick=openUserIpForm></div>
+        <div class="product-ip-form" id="product-ip" style="display: none;">
+            <div class="overlay" onclick=openProductIpForm></div>
             <div class="row">
                 <div class="col-sm-12 table-container">
-                    <table id="user-ip-table" style="scrollbar-width: auto;">
+                    <table id="product-ip-table" style="scrollbar-width: auto;">
                         <thead>
                             <tr role="row">
                                 <th>
-                                    <button id="log_username">Username</button>
+                                    <button id="log_product_id">Productname</button>
                                 </th>
                                 <th>
                                     <button id="log_datetime">Datetime</button>
                                 </th>
                                 <th>
-                                    <button id="log_user_ip">User IP</button>
+                                    <button id="log_product_ip">Product IP</button>
                                 </th>
                                 <th>
                                     <button id="description">Description</button>
@@ -106,13 +106,13 @@
 
                             </tr>
                         </thead>
-                        <tbody id="user-ip-table-content">
+                        <tbody id="product-ip-table-content">
                         </tbody>
                     </table>
                     
                 </div>    
             </div>
-            <button type="button" class="btn-primary cancel" onclick=closeUserIpForm>Close</button>
+            <button type="button" class="btn-primary cancel" onclick=closeProductIpForm>Close</button>
         </div>
 
         <!-- Sidebar -->
@@ -409,18 +409,18 @@
 
                         <div class="topbar-divider d-none d-sm-block"></div>
 
-                        <!-- Nav Item - User Information -->
+                        <!-- Nav Item - Product Information -->
                         <li class="nav-item dropdown no-arrow">
-                            <a class="nav-link dropdown-toggle" href="#" id="userDropdown" role="button"
+                            <a class="nav-link dropdown-toggle" href="#" id="productDropdown" role="button"
                                 data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                                 <span class="mr-2 d-none d-lg-inline text-gray-600 small">{{name}}</span>
-                                <i class="fa-solid fa-user"></i>
+                                <i class="fa-solid fa-product"></i>
                             </a>
-                            <!-- Dropdown - User Information -->
+                            <!-- Dropdown - Product Information -->
                             <div class="dropdown-menu dropdown-menu-right shadow animated--grow-in"
-                                aria-labelledby="userDropdown">
+                                aria-labelledby="productDropdown">
                                 <a class="dropdown-item" href="#">
-                                    <i class="fas fa-user fa-sm fa-fw mr-2 text-gray-400"></i>
+                                    <i class="fas fa-product fa-sm fa-fw mr-2 text-gray-400"></i>
                                     Profile
                                 </a>
                                 <a class="dropdown-item" href="#">
@@ -443,12 +443,11 @@
 
                 </nav>
                 <!-- End of Topbar -->
-                
-                {% block content %}
+            
                 <!-- Begin Page Content -->
                 <div class="container-fluid">
 
-                    <!-- DataTales Users -->
+                    <!-- DataTales Products -->
                     
                         <div class="card shadow mb-4">
                             <div class="card-header py-3">
@@ -461,22 +460,22 @@
                                             <div class="row">
                                                 <div class="col-sm-12 col-md-4">
                                                     <div class="dataTables_length" id="dataTable_length">
-                                                        <form action="/users" method="post" id="user-form">
+                                                        <form action="/products" method="post" id="product-form">
                                                             <label for="option">Show 
-                                                                <select id="count_user_option" name="count_user_option" aria-controls="dataTable" class="custom-select custom-select-sm form-control form-control-sm">
-                                                                    <option value="ALL" {% if count_user_option == "ALL" %}selected{% endif %}>ALL</option>
-                                                                    <option value="10" {% if count_user_option == "10" %}selected{% endif %}>10</option>
-                                                                    <option value="25" {% if count_user_option == "25" %}selected{% endif %}>25</option>
-                                                                    <option value="50" {% if count_user_option == "50" %}selected{% endif %}>50</option>
-                                                                    <option value="100" {% if count_user_option == "100" %}selected{% endif %}>100</option>
+                                                                <select id="count_product_option" name="count_product_option" aria-controls="dataTable" class="custom-select custom-select-sm form-control form-control-sm">
+                                                                    <option value="ALL" {% if count_product_option == "ALL" %}selected{% endif %}>ALL</option>
+                                                                    <option value="10" {% if count_product_option == "10" %}selected{% endif %}>10</option>
+                                                                    <option value="25" {% if count_product_option == "25" %}selected{% endif %}>25</option>
+                                                                    <option value="50" {% if count_product_option == "50" %}selected{% endif %}>50</option>
+                                                                    <option value="100" {% if count_product_option == "100" %}selected{% endif %}>100</option>
                                                                 </select> entries
                                                             </label>
                                                         </form>
                                                     </div>
                                                 </div>
                                                 <div class="col-sm-12 col-md-4">
-                                                    <div class="add-user-button" style="text-align: center;">
-                                                        <button id="add-user-form" class="btn btn-primary">Add User</button>
+                                                    <div class="add-product-button" style="text-align: center;">
+                                                        <button id="add-product-form" class="btn btn-primary">Add Product</button>
                                                     </div>
                                                 </div>
                                                 <div class="col-sm-12 col-md-4">
@@ -488,83 +487,14 @@
                                                 </div>
                                             </div>
                                             
-                                            <div class="row">
-                                                <div class="col-sm-12 table-container">
-                                                    <!-- <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0"> -->
-                                                    <table class="data-table" style="scrollbar-width: auto;">
-                                                        <thead>
-                                                            <tr role="row">
-                                                                <!-- <th class="sorting" tabindex="0" aria-controls="dataTable" rowspan="1" colspan="1" style="min-width: 100px;" aria-sort="ascending" aria-label="Username: activate to sort column descending">
-                                                                    <button id="username">Username</button>
-                                                                </th> -->
-                                                                <th>
-                                                                    <button id="username">Username</button>
-                                                                </th>
-                                                                <th>
-                                                                    <button id="password">Password</button>
-                                                                </th>
-                                                                <th>
-                                                                    <button id="name">Name</button>
-                                                                </th>
-                                                                <th>
-                                                                    <button id="user_role">User Role</button>
-                                                                </th>
-                                                                <th>
-                                                                    <button id="user_status">User Status</button>
-                                                                </th>
-                                                                <th>
-                                                                    <button id="add_date">Add Date</button>
-                                                                </th>
-                                                                <th>
-                                                                    <button id="description">Description</button>
-                                                                </th>
-                                                                <!-- <th class="sorting" tabindex="0" data-column="username" data-order="asc">Username</th>
-                                                                <th class="sorting" tabindex="0" data-column="password" data-order="asc">Password</th>
-                                                                <th class="sorting" tabindex="0" data-column="name" data-order="asc">Name</th>
-                                                                <th class="sorting" tabindex="0" data-column="user_role" data-order="asc">User Role</th>
-                                                                <th class="sorting" tabindex="0" data-column="user_status" data-order="asc">User Status</th>
-                                                                <th class="sorting" tabindex="0" data-column="description" data-order="asc">Description</th> -->
-
-                                                            </tr>
-                                                        </thead>
-                                                        <!-- <tfoot>
-                                                            <tr>
-                                                                <th rowspan="1" colspan="1">Username</th>
-                                                                <th rowspan="1" colspan="1">Password</th>
-                                                                <th rowspan="1" colspan="1">Name</th>
-                                                                <th rowspan="1" colspan="1">User Role</th>
-                                                                <th rowspan="1" colspan="1">User Status</th>
-                                                                <th rowspan="1" colspan="1">Description</th>
-                                                            </tr>
-                                                        </tfoot> -->
-                                                        <!-- {% for user in users %} -->
-                                                        <tbody id="table-content">
-                                                            <!-- <tr class="sorting_1">
-                                                                <td>{{ user["username"] }}</td>
-                                                                <td>{{ user["password"] }}</td>
-                                                                <td>{{ user["name"] }}</td>
-                                                                <td>{{ user["user_role"] }}</td>
-                                                                <td>{{ user["user_status"] }}</td>
-                                                                <td>{{ user["description"] }}</td>
-                                                            </tr> -->
-                                                        </tbody>
-                                                        <!-- {% endfor %} -->
-                                                    </table>
-                                                    
-                                                </div>    
+                                            <div class="row" id="product-container">
+                                                
                                             </div>
                                             <div class="row">
                                                 <div class="col-sm-12 col-md-5">
-                                                    <div class="dataTables_info" id="dataTable_info" role="status" aria-live="polite">{% set count_option = count_user_option | default("0") %}
-                                                        {% set count_users_value = count_users["count_users"] | int %}
-                                                        
-                                                        {% if count_option == "ALL" %}
-                                                            Showing 1 to {{ count_users_value }} of {{ count_users_value }} entries
-                                                        {% else %}
-                                                            {% set count_option_int = count_option | int %}
-                                                            {% set min_value = count_option_int if count_option_int < count_users_value else count_users_value %}
-                                                            Showing 1 to {{ min_value }} of {{ count_users_value }} entries
-                                                        {% endif %}</div>
+                                                    <div class="dataTables_info" id="dataTable_info" role="status" aria-live="polite">
+                                                       
+                                                    </div>
                                                 </div>
                                                 <div class="col-sm-12 col-md-7">
                                                     <div class="dataTables_paginate paging_simple_numbers" id="dataTable_paginate">
@@ -605,7 +535,6 @@
 
                 </div>
                 <!-- /.container-fluid -->
-                {% endblock %}
 
             </div>
             <!-- End of Main Content -->
@@ -668,36 +597,36 @@
     <!-- Page level custom scripts -->
     <script src="../static/js/demo/datatables-demo.js"></script>
 
-    <script src="../static/js/users.js"></script>
+    <script src="../static/js/products.js"></script>
 
     <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
     
     <script src="../static/js/alert.js"></script>
 
     <script>
-        document.getElementById("add-user-form").addEventListener("click", function() {
-            openAddUserForm()
-        });
+        // document.getElementById("add-product-form").addEventListener("click", function() {
+        //     openAddProductForm()
+        // });
 
-        function openAddUserForm() {
-            document.getElementById("add-user").style.display = "block";
-        }
+        // function openAddProductForm() {
+        //     document.getElementById("add-product").style.display = "block";
+        // }
 
-        function closeAddUserForm() {
-            document.getElementById("add-user").style.display = "none";
-        }
+        // function closeAddProductForm() {
+        //     document.getElementById("add-product").style.display = "none";
+        // }
 
-        document.getElementById("user-ip-form").addEventListener("click", function() {
-            openUserIpForm()
-        });
+        // document.getElementById("product-ip-form").addEventListener("click", function() {
+        //     openProductIpForm()
+        // });
 
-        function openUserIpForm() {
-            document.getElementById("user-ip").style.display = "block";
-        }
+        // function openProductIpForm() {
+        //     document.getElementById("product-ip").style.display = "block";
+        // }
 
-        function closeUserIpForm() {
-            document.getElementById("user-ip").style.display = "none";
-        }
+        // function closeProductIpForm() {
+        //     document.getElementById("product-ip").style.display = "none";
+        // }
 
         function togglePasswordVisibility() {
             var passwordInput = document.getElementById("password");
@@ -719,53 +648,53 @@
             }
         }
 
-        // document.getElementById("add-user-button").addEventListener("click", async () => {
-        //     const usernameInput = document.getElementsByName("username")[0];
+        // document.getElementById("add-product-button").addEventListener("click", async () => {
+        //     const product_idInput = document.getElementsByName("product_id")[0];
         //     const passwordInput = document.getElementsByName("password")[0];
         //     const nameInput = document.getElementsByName("name")[0];
-        //     const userRoleInput = document.getElementsByName("user-role")[0];
+        //     const productRoleInput = document.getElementsByName("product-role")[0];
         //     const descriptionInput = document.getElementsByName("description")[0];
 
-        //     const username = usernameInput.value;
+        //     const product_id = product_idInput.value;
         //     const password = passwordInput.value;
         //     const name = nameInput.value;
-        //     const user_role_id = userRoleInput.value;
-        //     const user_status_id = 1;
+        //     const product_role_id = productRoleInput.value;
+        //     const product_status_id = 1;
         //     const description = descriptionInput.value;
 
-        //     if (username && password && name && user_role_id && user_status_id) {
-        //         const response = await fetch(`/add-user/${username}/${password}/${name}/${user_role_id}/${user_status_id}/${description}`, {
+        //     if (product_id && password && name && product_role_id && product_status_id) {
+        //         const response = await fetch(`/add-product/${product_id}/${password}/${name}/${product_role_id}/${product_status_id}/${description}`, {
         //             method: "POST"
         //         });
-        //         // const response = await fetch("/add-user", {
+        //         // const response = await fetch("/add-product", {
         //         //     method: "POST",
         //         //     headers: {
         //         //         "Content-Type": "application/json",
         //         //     },
         //         //     body: JSON.stringify({
-        //         //         username: username,
+        //         //         product_id: product_id,
         //         //         password: password,
         //         //         name: name,
-        //         //         user_role_id: user_role_id,
-        //         //         user_status_id: 1,
+        //         //         product_role_id: product_role_id,
+        //         //         product_status_id: 1,
         //         //         description: description,
         //         //     }),
         //         // });
 
         //         if (!response.ok) {
-        //             throw new Error("Failed to fetch user");
+        //             throw new Error("Failed to fetch product");
         //         }
 
         //         const responseText = await response.text();
 
         //         if (response.ok) {
-        //             console.log("User added:", responseText);
-        //             showAlert("Đã thêm user: " + responseText, false);
-        //             // Assuming you want to redirect to /users on success
-        //             // window.location.href = "/users";
+        //             console.log("Product added:", responseText);
+        //             showAlert("Đã thêm product: " + responseText, false);
+        //             // Assuming you want to redirect to /products on success
+        //             // window.location.href = "/products";
         //         } else {
         //             console.error("No response received");
-        //             showAlert("Không thêm được user", true);
+        //             showAlert("Không thêm được product", true);
         //         }
         //     } else {
         //         console.error("Fill full to add!!!");
@@ -865,14 +794,14 @@
         
     </script>
     
-    <script>
+    <!-- <script>
         const tableContent = document.getElementById("table-content")
         const tableButtons = document.querySelectorAll(".data-table th button");
-        userData = []
+        productData = []
 
-        // const userIpTable = document.getElementById("user-ip-table-content")
-        // const userIpTableButtons = document.querySelectorAll("#user-ip-table th button");
-        // userIPData = []
+        // const productIpTable = document.getElementById("product-ip-table-content")
+        // const productIpTableButtons = document.querySelectorAll("#product-ip-table th button");
+        // productIPData = []
 
         // const createCreateLinkColumn = (createLinkColumn, obj) => {
 
@@ -886,60 +815,23 @@
         //         tempInput.select();
         //         document.execCommand("copy");
         //         document.body.removeChild(tempInput);
-        //         // Optionally, you can provide user feedback here
+        //         // Optionally, you can provide product feedback here
         //     });
 
         //     createLinkColumn.innerHTML = ''; // Clear previous content
         //     // createLinkColumn.appendChild(linkInput);
         //     createLinkColumn.appendChild(copyButton);
         // };
-
-        const createCreateLinkColumn = async (createLinkColumn, username, password) => {
-            const copyButton = document.createElement("button");
-            copyButton.innerHTML = '<i class="fa-solid fa-link"></i>';
-            copyButton.addEventListener("click", async () => {
-                try {
-                    const response = await fetch(`/create-login-url/${username}/${password}`);
-                    if (!response.ok) {
-                        throw new Error("Failed to fetch URL");
-                    }
-                    const url = await response.text();
-
-                    if (url) {
-                        const tempInput = document.createElement("input");
-                        tempInput.value = url;
-                        document.body.appendChild(tempInput);
-                        tempInput.select();
-                        document.execCommand("copy");
-                        document.body.removeChild(tempInput);
-
-                        // Provide user feedback
-                        console.log("URL copied:", url);
-                        showAlert("Đã tạo và copy link cho " + username, false); // Assuming showAlert is defined elsewhere
-                    } else {
-                        console.error("No URL received");
-                        showAlert("Không tạo và copy link cho " + username + " được", true); // Assuming showAlert is defined elsewhere
-                    }
-                } catch (error) {
-                    console.error("Error copying URL:", error);
-                    showAlert("Không tạo và copy link cho " + username + " được", true); // Assuming showAlert is defined elsewhere
-                }
-                    
-            });
-
-            createLinkColumn.innerHTML = ''; // Clear previous content
-            createLinkColumn.appendChild(copyButton);
-        };
         
         // const createIPListColumn = (ipListColumn, ipList) => {
         //     const showIPButton = document.createElement("button");
         //     showIPButton.innerHTML = '<i class="fa-solid fa-eye"></i>';
             
         //     showIPButton.addEventListener("click", () => {
-        //         openUserIpForm();
+        //         openProductIpForm();
         //         // Handle the display of IP list here
         //         // You can show a popup or some other UI element to display the list of IPs
-        //         // Use the ipList parameter to access the list of IPs for the current user
+        //         // Use the ipList parameter to access the list of IPs for the current product
         //         // For example:
         //         const ipListPopup = document.createElement("div");
         //         ipListPopup.textContent = ipList.join(", "); // Assuming ipList is an array of IP addresses
@@ -953,432 +845,21 @@
 
 
         const createRow = (obj) => {
+            
             const row = document.createElement("tr");
             const objKeys = Object.keys(obj);
-            const columnOrder = ["username", "password", "name", "user_role", "user_status", "add_date", "description"];
-
+            const columnOrder = ["id", "category", "product", "price", "shop_price", "quantity", "link", "shop", "purchase_date", "receipt_date", "description"];
+            // const columnOrder = ["id"]
             columnOrder.forEach((key) => {
                 const cell = document.createElement("td");
-                const username = obj["user_role"]
+                const product_id = obj["id"]
+                console.log(product_id)
                 cell.setAttribute("data-attr", key);
                 cell.setAttribute("class", key);
                 // cell.innerHTML = obj[key] === null ? "None" : obj[key]; // Handle null values
-                if (key == "user_status") {
-                    const toggleSwitch = document.createElement("label");
-                    toggleSwitch.classList.add("switch");
-                    const checkbox = document.createElement("input");
-                    checkbox.type = "checkbox";
-                    checkbox.checked = obj[key] === "Active"; // Kiểm tra trạng thái để chọn Active hoặc Deactive
-                    const slider = document.createElement("span");
-                    slider.classList.add("slider");
-
-                    if (obj["user_role"] == "Admin") {
-                        checkbox.disabled = true;
-                    } else {
-                        checkbox.disabled = false;
-                    }
-
-
-                    // Add onclick event handler to the checkbox
-                    checkbox.onclick = async () => {
-                        const new_user_status = checkbox.checked ? "Active" : "Deactive";
-                        const username = obj["username"]; // Replace "user_id" with the actual property name for user ID
-                        // Assuming you're using fetch for AJAX requests
-                        const response = await fetch(`/edit-user/user_status/${username}/${new_user_status}`, {
-                            method: "POST"
-                        });
-
-                        if (!response.ok) {
-                            throw new Error("Failed to fetch URL");
-                        }
-                        const url = await response.text();
-                        if (response.ok) {
-                            // Update the user_status in the UI
-                            obj[key] = new_user_status;
-                            // Update the checkbox state (this might not be necessary, depending on your UI behavior)
-                            checkbox.checked = new_user_status === "Active";
-                            console.log("Updated new user status.");
-                            showAlert("Đã cập nhật được trạng thái: " + new_user_status + " cho "+ username, false);
-                            window.location.reload(true);
-                        } else {
-                            // Handle error
-                            console.error("Failed to update user status.");
-                            showAlert("Không cập nhật được trạng thái: " + new_user_status + " cho "+ username, true);
-                        }
-                    };
-
-                    
-                    toggleSwitch.appendChild(checkbox);
-                    toggleSwitch.appendChild(slider);
-                    cell.appendChild(toggleSwitch);
-                } else if (key === "password") {
-                    const textContainer = document.createElement("div");
-                    textContainer.className = "cell-content";
-
-                    const passwordNode = document.createElement("span");
-                    passwordNode.textContent = obj[key] === null ? "None" : "********";
-                    textContainer.appendChild(passwordNode);
-
-                    const toggleButton = document.createElement("button");
-                    toggleButton.innerHTML = '<i class="fa-solid fa-eye"></i>';
-                    // toggleButton.textContent = "Hide";
-                    let isHidden = true;
-
-                    toggleButton.addEventListener("click", () => {
-                        isHidden = !isHidden;
-                        if (isHidden) {
-                            passwordNode.textContent = "*********";
-                            // toggleButton.textContent = "Hide";
-                            toggleButton.innerHTML = '<i class="fa-solid fa-eye"></i>';
-                        } else {
-                            passwordNode.textContent = obj[key] === null ? "None" : obj[key];
-                            // toggleButton.textContent = "Unhide";
-                            toggleButton.innerHTML = '<i class="fa-sharp fa-solid fa-eye-slash"></i>';
-                        }
-                    });
-
-                    textContainer.appendChild(toggleButton);
-                    cell.appendChild(textContainer);
-                } else if (key == "name") {
-
-                    const textContainer = document.createElement("div");
-                    textContainer.className = "cell-content";
-
-                    const textNode = document.createElement("span");
-                    textNode.textContent = obj[key] === null ? "None" : obj[key];
-                    textContainer.appendChild(textNode);
-
-                    const editButton = document.createElement("button");
-                    editButton.innerHTML = '<i class="fas fa-edit"></i>';
-                    editButton.addEventListener("click", () => {
-                        textNode.style.display = "none";
-                        editButton.style.display = "none";
-
-                        const input = document.createElement("input");
-                        input.value = textNode.textContent;
-                        textContainer.appendChild(input);
-                        input.focus();
-                        input.addEventListener("keydown", async (event) => {
-                            if (event.key === "Enter") {
-                                const new_name = input.value;
-                                const username = obj["username"]; // Replace with actual user ID property
-                                const response = await fetch(`/edit-user/name/${username}/${new_name}`, {
-                                    method: "POST"
-                                });
-
-                                if (response.ok) {
-                                    textNode.textContent = new_name;
-                                    console.log("Updated new name: " + new_name + " for " + username);
-                                    showAlert("Đã cập nhật tên mới: " + new_name + " cho "+ username, false);
-                                } else {
-                                    console.error("Failed to update new name.");
-                                    showAlert("Không cập nhật được tên mới: " + new_name + " cho "+ username, true);
-                                }
-
-                                textNode.style.display = "inline";
-                                editButton.style.display = "inline";
-                                input.remove();
-                                
-                                // textNode.textContent = input.value;
-                                // textNode.style.display = "inline";
-                                // editButton.style.display = "inline";
-                                // input.remove();
-                            }
-                        });
-
-                        input.addEventListener("blur", async () => {
-                            const new_name = input.value;
-                            const username = obj["username"]; // Replace with actual user ID property
-                            const response = await fetch(`/edit-user/name/${username}/${new_name}`, {
-                                method: "POST"
-                            });
-
-                            if (response.ok) {
-                                textNode.textContent = new_name;
-                                console.log("Updated new name: " + new_name + " for " + username);
-                                showAlert("Đã cập nhật tên mới: " + new_name + " cho "+ username, false);
-                            } else {
-                                console.error("Failed to update user status.");
-                                console.error("Failed to update user status.");
-                                showAlert("Không cập nhật được tên mới: " + new_name + " cho "+ username, true);
-                            }
-
-                            textNode.style.display = "inline";
-                            editButton.style.display = "inline";
-                            input.remove();
-                            // textNode.textContent = input.value;
-                            // textNode.style.display = "inline";
-                            // editButton.style.display = "inline";
-                            // input.remove();
-                        });
-
-                        cell.appendChild(input);
-                        input.focus();
-                    });
-
-                    textContainer.appendChild(textNode);
-                    textContainer.appendChild(editButton);
-                    cell.appendChild(textContainer);
-                } else if (key == "user_role") {
-                    // const textContainer = document.createElement("div");
-                    // textContainer.className = "cell-content";
-
-                    // const textNode = document.createElement("span");
-                    // textNode.textContent = obj[key] === null ? "None" : obj[key];
-                    // textContainer.appendChild(textNode);
-
-                    // const editButton = document.createElement("button");
-                    // editButton.innerHTML = '<i class="fas fa-edit"></i>';
-                    // editButton.addEventListener("click", () => {
-                    //     textNode.style.display = "none";
-                    //     editButton.style.display = "none";
-
-                    //     const comboBox = document.createElement("select");
-                    //     const roles = ["Admin", "Member", "Guest", "Other"]; // Replace with your actual role values
-                    //     roles.forEach((role) => {
-                    //         const option = document.createElement("option");
-                    //         option.value = role;
-                    //         option.textContent = role;
-                    //         if (role === obj[key]) {
-                    //             option.selected = true;
-                    //         }
-                    //         comboBox.appendChild(option);
-                    //     });
-                    //     textContainer.appendChild(comboBox);
-                    //     comboBox.focus();
-
-                    //     comboBox.addEventListener("change", async () => {
-                    //         const new_user_role = comboBox.value;
-                    //         const username = obj["username"]; // Replace with actual user ID property
-                    //         const response = await fetch(`/edit-user/user_role/${username}/${new_user_role}`, {
-                    //             method: "POST"
-                    //         });
-
-                    //         if (response.ok) {
-                    //             textNode.textContent = new_user_role;
-                    //         } else {
-                    //             console.error("Failed to update user status.");
-                    //         }
-
-                    //         textNode.style.display = "inline";
-                    //         editButton.style.display = "inline";
-                    //         comboBox.remove();
-                    //     });
-                    // });
-
-                    // textContainer.appendChild(textNode);
-                    // textContainer.appendChild(editButton);
-                    // cell.appendChild(textContainer);
-
-                    const textContainer = document.createElement("div");
-                    textContainer.className = "cell-content";
-
-                    const textNode = document.createElement("span");
-                    textNode.textContent = obj[key] === null ? "None" : obj[key];
-                    textContainer.appendChild(textNode);
-
-                    const editButton = document.createElement("button");
-                    editButton.innerHTML = '<i class="fas fa-edit"></i>';
-                    editButton.addEventListener("click", () => {
-                        textNode.style.display = "none";
-                        editButton.style.display = "none";
-
-                        const comboBox = document.createElement("select");
-                        const roles = ["Admin", "Member", "Guest", "Other"]; // Replace with your actual role values
-                        roles.forEach((role) => {
-                            const option = document.createElement("option");
-                            option.value = role;
-                            option.textContent = role;
-                            if (role === obj[key]) {
-                                option.selected = true;
-                            }
-                            comboBox.appendChild(option);
-                        });
-                        textContainer.appendChild(comboBox);
-                        comboBox.focus();
-
-                        comboBox.addEventListener("change", async () => {
-                            const new_user_role = comboBox.value;
-                            const username = obj["username"]; // Replace with actual user ID property
-                            const response = await fetch(`/edit-user/user_role/${username}/${new_user_role}`, {
-                                method: "POST"
-                            });
-
-                            if (response.ok) {
-                                textNode.textContent = new_user_role;
-                                console.log("Updated new user role.");
-                                showAlert("Đã cập nhật role: " + new_user_role + " cho "+ username, false);
-                            } else {
-                                console.error("Failed to update user role.");
-                                showAlert("Không cập nhật được role: " + new_user_role + " cho "+ username, true);
-                            }
-
-                            textNode.style.display = "inline";
-                            editButton.style.display = "inline";
-                            comboBox.remove();
-                        });
-
-                        comboBox.addEventListener("blur", async () => {
-                            const new_user_role = comboBox.value;
-                            const username = obj["username"]; // Replace with actual user ID property
-                            const response = await fetch(`/edit-user/name/${username}/${new_user_role}`, {
-                                method: "POST"
-                            });
-
-                            if (response.ok) {
-                                textNode.textContent = new_user_role;
-                                console.log("Updated new user role.");
-                                showAlert("Đã cập nhật role: " + new_user_role + " cho "+ username, false);
-                            } else {
-                                console.error("Failed to update user role.");
-                                showAlert("Không cập nhật được role: " + new_user_role + " cho "+ username, true);
-                            }
-
-                            textNode.style.display = "inline";
-                            editButton.style.display = "inline";
-                            comboBox.remove();
-                        });
-                    });
-
-                    textContainer.appendChild(textNode);
-                    textContainer.appendChild(editButton);
-                    cell.appendChild(textContainer);
-                } else if (key === "add_date") {
-                    const textContainer = document.createElement("div");
-                    textContainer.className = "cell-content";
-
-                    const textNode = document.createElement("span");
-                    textNode.textContent = obj[key] === null ? "None" : formatDate(obj[key]); // Format the date
-                    textContainer.appendChild(textNode);
-
-                    // const editButton = document.createElement("button");
-                    // editButton.innerHTML = '<i class="fas fa-edit"></i>';
-                    // editButton.addEventListener("click", () => {
-                    //     textNode.style.display = "none";
-                    //     editButton.style.display = "none";
-
-                    //     const input = document.createElement("input");
-                    //     input.type = "datetime-local"; // Use the appropriate input type for date and time selection
-                    //     input.value = obj[key] || ""; // Set the initial value if available
-                    //     textContainer.appendChild(input);
-                    //     input.focus();
-
-                    //     input.addEventListener("blur", async () => {
-                    //         const new_add_date = input.value;
-                    //         const formattedDate = formatDate(new_add_date); // Format the new date
-                    //         const username = obj["username"]; // Replace with actual user ID property
-                    //         const response = await fetch(`/edit-user/add_date/${username}/${formattedDate}`, {
-                    //             method: "POST"
-                    //         });
-
-                    //         if (response.ok) {
-                    //             textNode.textContent = formattedDate;
-                    //             console.log("Updated new add date.");
-                    //             showAlert("Đã cập nhật ngày thêm: " + formattedDate + " cho "+ username, false);
-                    //         } else {
-                    //             console.error("Failed to update add date.");
-                    //             showAlert("Không cập nhật được ngày thêm: " + formattedDate + " cho "+ username, true);
-                    //         }
-
-                    //         textNode.style.display = "inline";
-                    //         editButton.style.display = "inline";
-                    //         input.remove();
-                    //     });
-
-                    //     cell.appendChild(input);
-                    // });
-
-                    textContainer.appendChild(textNode);
-                    // textContainer.appendChild(editButton);
-                    cell.appendChild(textContainer);
-                } else if (key == "description") {
-
-                    const textContainer = document.createElement("div");
-                    textContainer.className = "cell-content";
-
-                    const textNode = document.createElement("span");
-                    textNode.textContent = obj[key] === null ? "None" : obj[key];
-                    textContainer.appendChild(textNode);
-
-                    const editButton = document.createElement("button");
-                    editButton.innerHTML = '<i class="fas fa-edit"></i>';
-                    editButton.addEventListener("click", () => {
-                        textNode.style.display = "none";
-                        editButton.style.display = "none";
-
-                        const input = document.createElement("input");
-                        input.value = textNode.textContent;
-                        textContainer.appendChild(input);
-                        input.focus();
-                        input.addEventListener("keydown", async (event) => {
-                            if (event.key === "Enter") {
-                                const new_description = input.value;
-                                const username = obj["username"]; // Replace with actual user ID property
-                                const response = await fetch(`/edit-user/description/${username}/${new_description}`, {
-                                    method: "POST"
-                                });
-
-                                if (response.ok) {
-                                    textNode.textContent = new_description;
-                                    console.log("Updated new description.");
-                                    showAlert("Đã cập nhật ghi chú: " + new_description + " cho "+ username, false);
-                                } else {
-                                    console.error("Failed to update description.");
-                                    showAlert("Không cập nhật được ghi chú: " + new_description + " cho "+ username, true);
-                                }
-
-                                textNode.style.display = "inline";
-                                editButton.style.display = "inline";
-                                input.remove();
-                                
-                                // textNode.textContent = input.value;
-                                // textNode.style.display = "inline";
-                                // editButton.style.display = "inline";
-                                // input.remove();
-                            }
-                        });
-
-                        input.addEventListener("blur", async () => {
-                            const new_description = input.value;
-                            const username = obj["username"]; // Replace with actual user ID property
-                            const response = await fetch(`/edit-user/description/${username}/${new_description}`, {
-                                method: "POST"
-                            });
-
-                            if (response.ok) {
-                                textNode.textContent = new_description;
-                                console.log("Updated new description.");
-                                showAlert("Đã cập nhật ghi chú: " + new_description + " cho "+ username, false);
-                            } else {
-                                console.error("Failed to update description.");
-                                showAlert("Không cập nhật được ghi chú: " + new_description + " cho "+ username, true);
-                            }
-
-                            textNode.style.display = "inline";
-                            editButton.style.display = "inline";
-                            input.remove();
-                            // textNode.textContent = input.value;
-                            // textNode.style.display = "inline";
-                            // editButton.style.display = "inline";
-                            // input.remove();
-                        });
-
-                        cell.appendChild(input);
-                        input.focus();
-                    });
-
-                    textContainer.appendChild(textNode);
-                    textContainer.appendChild(editButton);
-                    cell.appendChild(textContainer);
-                } else {
-                    cell.innerHTML = obj[key] === null ? "None" : obj[key];
-                }
+                cell.innerHTML = obj[key] === null ? "None" : obj[key];
                 row.appendChild(cell);
             });
-
-            const createLinkCell = document.createElement("td");
-            createCreateLinkColumn(createLinkCell, obj["username"], obj["password"]); // Pass the cell and user data to the function
-            row.appendChild(createLinkCell);
             // const ipListCell = document.createElement("td");
             // createIPListColumn(ipListCell, obj["ip_list"]); // Pass the cell and IP list data to the function
             // row.appendChild(ipListCell);
@@ -1426,33 +907,17 @@
             });
         };
 
-        window.addEventListener("load", () => {
-            const userData = JSON.parse('{{ users | tojson | safe }}'); // Pass user data from Flask to JavaScript
-            getTableContent(userData);
-            
-            [...tableButtons].forEach((button) => {
-                button.addEventListener("click", (e) => {
-                    resetButtons(e);
-                    if (e.target.getAttribute("data-dir") === "desc") {
-                        sortData(userData, e.target.id, "desc");
-                        e.target.setAttribute("data-dir", "asc");
-                    } else {
-                        sortData(userData, e.target.id, "asc");
-                        e.target.setAttribute("data-dir", "desc");
-                    }
-                });
-            });
-        });
+        
 
-        // const getUserIpTable = (data) => {
+        // const getProductIpTable = (data) => {
         //         data.forEach((obj) => {
         //             const row = createRow(obj);
-        //             userIpTable.appendChild(row);
+        //             productIpTable.appendChild(row);
         //         });
         // };
 
-        // const sortUserIpData = (data, param, direction = "asc") => {
-        //     userIpTable.innerHTML = '';
+        // const sortProductIpData = (data, param, direction = "asc") => {
+        //     productIpTable.innerHTML = '';
         //     const sortedData = direction == "asc"
         //         ? [...data].sort(function (a, b) {
         //             if (a[param] < b[param]) {
@@ -1473,11 +938,11 @@
         //             return 0;
         //         });
 
-        //     getUserIpTable(sortedData);
+        //     getProductIpTable(sortedData);
         // };
 
-        // const resetUserIpTableButtons = (event) => {
-        //     [...userIpTableButtons].map((button) => {
+        // const resetProductIpTableButtons = (event) => {
+        //     [...productIpTableButtons].map((button) => {
         //         if (button !== event.target) {
         //         button.removeAttribute("data-dir");
         //         }
@@ -1485,17 +950,17 @@
         // };
 
         // window.addEventListener("load", () => {
-        //     const userIpData = JSON.parse('{{ user_log | tojson | safe }}'); // Pass user data from Flask to JavaScript
-        //     getUserIpTable(userIpData);
+
+        //     getProductIpTable(productIpData);
             
-        //     [...userIpTableButtons].forEach((button) => {
+        //     [...productIpTableButtons].forEach((button) => {
         //         button.addEventListener("click", (e) => {
-        //             resetUserIpTableButtons(e);
+        //             resetProductIpTableButtons(e);
         //             if (e.target.getAttribute("data-dir") === "desc") {
-        //                 sortUserIpData(userIpData, e.target.id, "desc");
+        //                 sortProductIpData(productIpData, e.target.id, "desc");
         //                 e.target.setAttribute("data-dir", "asc");
         //             } else {
-        //                 sortUserIpData(userIpData, e.target.id, "asc");
+        //                 sortProductIpData(productIpData, e.target.id, "asc");
         //                 e.target.setAttribute("data-dir", "desc");
         //             }
         //         });
@@ -1505,35 +970,35 @@
         // tableContent.addEventListener("change", async (e) => {
             // if (e.target.tagName === "INPUT" && e.target.type === "checkbox") {
             //     const rowIndex = e.target.closest("tr").rowIndex - 1;
-            //     const user = userData[rowIndex];
-            //     console.log(userData)
+            //     const product = productData[rowIndex];
+            //     console.log(productData)
 
             //     const newStatus = e.target.checked ? "Active" : "Deactive";
             //     const newStatusId = e.target.checked ? 1 : 0;
 
-            //     if (user.user_status !== newStatus) {
-            //         user.user_status = newStatus;
+            //     if (product.product_status !== newStatus) {
+            //         product.product_status = newStatus;
             //         try {
-            //             const response = await fetch(`/update_user_status/${user.username}/${newStatusId}`, {
+            //             const response = await fetch(`/update_product_status/${product.product_id}/${newStatusId}`, {
             //                 method: "POST" // Hoặc "PUT" tùy thuộc vào cấu hình của bạn
             //             });
 
             //             if (!response.ok) {
             //                 // Xử lý lỗi nếu cần
-            //                 console.error("Error updating user status.");
+            //                 console.error("Error updating product status.");
             //             }
             //         } catch (error) {
-            //             console.error("Error updating user status:", error);
+            //             console.error("Error updating product status:", error);
             //         }
             //     }
             // }
         // }); 
-    </script>
+    </script> -->
 
     <style>
         :root {
             --white: black;
-            --black: white;
+            --black: #f9f6f6;
             --gray: black;
         }
 
@@ -1702,7 +1167,7 @@
             transform: translateX(20px);
         }
 
-        button.edit-user{
+        button.edit-product{
             background: white;
             border-radius: revert;
         }
@@ -1734,10 +1199,10 @@
             align-items: center;
             min-height: 100vh;
             background-color: #f1f1f1;
-            font-family: Arial, sans-serif;
+            font-family: 'Times New Roman', Times, serif;
         }
 
-        .add-user-form, .user-ip-form {
+        .add-product-form, .product-ip-form {
             display: none;
             position: fixed;
             top: 50%;
@@ -1751,7 +1216,7 @@
             width: 400px;
         }
 
-        .add-user-form input, select {
+        .add-product-form input, select {
             margin-bottom: 1.5%;
         }
 
@@ -1770,7 +1235,7 @@
             z-index: 999;
         }
 
-        /* .add-user-form.open {
+        /* .add-product-form.open {
             display: block;
         } */
 
@@ -1786,6 +1251,43 @@
 
         .cancel {
             background-color: grey;
+        }
+
+        .product-card{
+            display: flex;
+            /* width: 50%; */
+            
+            color: #ffffff94;
+            margin-bottom: 1%;
+            background-color: black;
+            align-items: center;
+            border-radius: .35rem;
+        }
+
+        .product-info{
+            padding: 2% 0.5%;
+            width: 132%;
+        }
+
+        /* .product-info h2 a{
+            color: #ffffffe3;    
+        } */
+
+        .product-info h2 {
+            font-size: .75rem;
+            line-height: 1;
+            margin-bottom: 1%;
+        }
+        .product-info p{
+            font-size: .6rem;
+            margin-bottom: 0;
+        }
+        .product-info hr{
+            margin: 0;
+        }
+
+        .menu-button i, .edit-button i {
+            color: white;   
         }
         
     </style>
